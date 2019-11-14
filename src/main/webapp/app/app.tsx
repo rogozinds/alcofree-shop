@@ -4,7 +4,7 @@ import './app.scss';
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Card } from 'reactstrap';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import { hot } from 'react-hot-loader';
 
@@ -17,6 +17,7 @@ import { hasAnyAuthority } from 'app/shared/auth/private-route';
 import ErrorBoundary from 'app/shared/error/error-boundary';
 import { AUTHORITIES } from 'app/config/constants';
 import AppRoutes from 'app/routes';
+import Home from 'app/modules/Home';
 
 const baseHref = document
   .querySelector('base')
@@ -51,9 +52,11 @@ export const App = (props: IAppProps) => {
               <AppRoutes />
             </ErrorBoundary>
           </Card>
-          <Footer />
+          <Footer>
+          </Footer>
         </div>
       </div>
+      <Route path="/home/" component={Home} />
     </Router>
   );
 };

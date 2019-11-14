@@ -1,0 +1,22 @@
+.card {
+        min-width: 250px;
+        height : 150px;
+}
+.bullet {
+    display: 'inline-block';
+    margin: '0 2px';
+    transform: 'scale(0.8)';
+}
+title {
+    font-size: 14;
+}
+.pos {
+    margin-bottom: 12;
+}
+.content {
+    flex-grow:2;
+}
+.media {
+    height: 100px;
+    flex-grow:1;
+}
