@@ -18,6 +18,7 @@ import ErrorBoundary from 'app/shared/error/error-boundary';
 import { AUTHORITIES } from 'app/config/constants';
 import AppRoutes from 'app/routes';
 import Home from 'app/modules/Home';
+import Detail from 'app/modules/Detail';
 
 const baseHref = document
   .querySelector('base')
@@ -57,6 +58,7 @@ export const App = (props: IAppProps) => {
         </div>
       </div>
       <Route path="/home/" component={Home} />
+      <Route path="/detail/" component={Detail} />
     </Router>
   );
 };
