@@ -16,25 +16,25 @@ describe('Notification Middleware', () => {
   // Default action for use in local tests
   const DEFAULT = {
     type: SUCCESS_TYPE,
-    payload: 'foo'
+    payload: 'product'
   };
   const DEFAULT_PROMISE = {
     type: SUCCESS_TYPE,
-    payload: Promise.resolve('foo')
+    payload: Promise.resolve('product')
   };
   const DEFAULT_SUCCESS = {
     type: SUCCESS_TYPE,
     meta: {
       successMessage: DEFAULT_SUCCESS_MESSAGE
     },
-    payload: Promise.resolve('foo')
+    payload: Promise.resolve('product')
   };
   const HEADER_SUCCESS = {
     type: SUCCESS_TYPE,
     payload: Promise.resolve({
       status: 201,
       statusText: 'Created',
-      headers: { 'app-alert': 'foo.created', 'app-params': 'foo' }
+      headers: { 'app-alert': 'product.created', 'app-params': 'product' }
     })
   };
   const DEFAULT_ERROR = {
@@ -42,7 +42,7 @@ describe('Notification Middleware', () => {
     meta: {
       errorMessage: DEFAULT_ERROR_MESSAGE
     },
-    payload: Promise.reject(new Error('foo'))
+    payload: Promise.reject(new Error('product'))
   };
   const VALIDATION_ERROR = {
     type: ERROR_TYPE,
@@ -68,7 +68,7 @@ describe('Notification Middleware', () => {
       response: {
         status: 400,
         statusText: 'Bad Request',
-        headers: { 'app-error': 'foo.creation', 'app-params': 'foo' }
+        headers: { 'app-error': 'product.creation', 'app-params': 'product' }
       }
     })
   };
@@ -117,14 +117,14 @@ describe('Notification Middleware', () => {
   });
 
   it('should not trigger a toast message but should return action', () => {
-    expect(store.dispatch(DEFAULT).payload).toEqual('foo');
+    expect(store.dispatch(DEFAULT).payload).toEqual('product');
     expect((toastify.toast as any).error.called).toEqual(false);
     expect((toastify.toast as any).success.called).toEqual(false);
   });
 
   it('should not trigger a toast message but should return promise success', async () => {
     await store.dispatch(DEFAULT_PROMISE).then(resp => {
-      expect(resp.value).toEqual('foo');
+      expect(resp.value).toEqual('product');
     });
     expect((toastify.toast as any).error.called).toEqual(false);
     expect((toastify.toast as any).success.called).toEqual(false);
@@ -132,7 +132,7 @@ describe('Notification Middleware', () => {
 
   it('should trigger a success toast message and return promise success', async () => {
     await store.dispatch(DEFAULT_SUCCESS).then(resp => {
-      expect(resp.value).toEqual('foo');
+      expect(resp.value).toEqual('product');
     });
     const toastMsg = (toastify.toast as any).success.getCall(0).args[0];
     expect(toastMsg).toEqual(DEFAULT_SUCCESS_MESSAGE);
@@ -142,12 +142,12 @@ describe('Notification Middleware', () => {
       expect(resp.value.status).toEqual(201);
     });
     const toastMsg = (toastify.toast as any).success.getCall(0).args[0];
-    expect(toastMsg).toContain('foo.created');
+    expect(toastMsg).toContain('product.created');
   });
 
   it('should trigger an error toast message and return promise error', async () => {
     await store.dispatch(DEFAULT_ERROR).catch(err => {
-      expect(err.message).toEqual('foo');
+      expect(err.message).toEqual('product');
     });
     const toastMsg = (toastify.toast as any).error.getCall(0).args[0];
     expect(toastMsg).toEqual(DEFAULT_ERROR_MESSAGE);
@@ -185,6 +185,6 @@ describe('Notification Middleware', () => {
       expect(err.response.status).toEqual(400);
     });
     const toastMsg = (toastify.toast as any).error.getCall(0).args[0];
-    expect(toastMsg).toContain('foo.creation');
+    expect(toastMsg).toContain('product.creation');
   });
 });

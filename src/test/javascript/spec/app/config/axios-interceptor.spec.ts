@@ -10,12 +10,12 @@ describe('Axios Interceptor', () => {
     setupAxiosInterceptors(onUnauthenticated);
 
     it('onRequestSuccess is called on fulfilled request', () => {
-      expect((client.interceptors.request as any).handlers[0].fulfilled({ data: 'foo', url: '/test' })).toMatchObject({
-        data: 'foo'
+      expect((client.interceptors.request as any).handlers[0].fulfilled({ data: 'product', url: '/test' })).toMatchObject({
+        data: 'product'
       });
     });
     it('onResponseSuccess is called on fulfilled response', () => {
-      expect((client.interceptors.response as any).handlers[0].fulfilled({ data: 'foo' })).toEqual({ data: 'foo' });
+      expect((client.interceptors.response as any).handlers[0].fulfilled({ data: 'product' })).toEqual({ data: 'product' });
     });
     it('onResponseError is called on rejected response', () => {
       (client.interceptors.response as any).handlers[0].rejected({

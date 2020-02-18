@@ -17,8 +17,8 @@ import { hasAnyAuthority } from 'app/shared/auth/private-route';
 import ErrorBoundary from 'app/shared/error/error-boundary';
 import { AUTHORITIES } from 'app/config/constants';
 import AppRoutes from 'app/routes';
-import Home from 'app/modules/Home';
-import Detail from 'app/modules/Detail';
+import Home from 'app/modules/list/Home';
+import Detail from 'app/modules/list/Detail';
 
 const baseHref = document
   .querySelector('base')

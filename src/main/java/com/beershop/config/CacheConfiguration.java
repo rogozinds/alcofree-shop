@@ -2,6 +2,7 @@ package com.beershop.config;
 
 import java.time.Duration;
 
+import com.beershop.domain.Product;
 import org.ehcache.config.builders.*;
 import org.ehcache.jsr107.Eh107Configuration;
 
@@ -42,6 +43,7 @@ public class CacheConfiguration {
             createCache(cm, com.beershop.domain.User.class.getName());
             createCache(cm, com.beershop.domain.Authority.class.getName());
             createCache(cm, com.beershop.domain.User.class.getName() + ".authorities");
+            createCache(cm, Product.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }
