@@ -44,6 +44,11 @@ public class CacheConfiguration {
             createCache(cm, com.beershop.domain.Authority.class.getName());
             createCache(cm, com.beershop.domain.User.class.getName() + ".authorities");
             createCache(cm, Product.class.getName());
+            createCache(cm, com.beershop.domain.Country.class.getName());
+            createCache(cm, com.beershop.domain.Shop.class.getName());
+            createCache(cm, com.beershop.domain.Shop.class.getName() + ".fk_shop_countries");
+            createCache(cm, com.beershop.domain.Shop.class.getName() + ".country_shops");
+            createCache(cm, com.beershop.domain.Country.class.getName() + ".country_shops");
             // jhipster-needle-ehcache-add-entry
         };
     }

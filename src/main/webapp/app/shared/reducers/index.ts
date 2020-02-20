@@ -17,6 +17,14 @@ import product, {
 } from 'app/entities/product/product.reducer';
 
 import list from 'app/modules/list/list.reducer';
+// prettier-ignore
+import country, {
+  CountryState
+} from 'app/entities/country/country.reducer';
+// prettier-ignore
+import shop, {
+  ShopState
+} from 'app/entities/shop/shop.reducer';
 /* jhipster-needle-add-reducer-import - JHipster will add reducer here */
 
 export interface IRootState {
@@ -30,6 +38,8 @@ export interface IRootState {
   readonly password: PasswordState;
   readonly settings: SettingsState;
   readonly product: ProductState;
+  readonly country: CountryState;
+  readonly shop: ShopState;
   /* jhipster-needle-add-reducer-type - JHipster will add reducer type here */
   readonly loadingBar: any;
 }
@@ -46,9 +56,10 @@ const rootReducer = combineReducers<IRootState>({
   settings,
   product,
   list,
+  country,
+  shop,
   /* jhipster-needle-add-reducer-combine - JHipster will add reducer here */
   loadingBar
-
 });
 
 export default rootReducer;
