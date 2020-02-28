@@ -112,7 +112,19 @@ public class ProductResource {
         Optional<ProductDTO> productDTO = productService.findOne(id);
         return ResponseUtil.wrapOrNotFound(productDTO);
     }
-
+    /**
+     * /products?countryId=100 " where 100 id of the country from countries table
+     *
+     */
+    @GetMapping("/products/filter")
+    public ResponseEntity<List<ProductDTO>> getProductsByCountry(
+            @RequestParam("countryId") long countryId,
+            Pageable pageable) {
+        log.debug("REST request to get ProudctsWithFilter : {}", countryId);
+        Page<ProductDTO> page = productService.findProductsByCountry(countryId, pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
     /**
      * {@code DELETE  /products/:id} : delete the "id" product.
      *

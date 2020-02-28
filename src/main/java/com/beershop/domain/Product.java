@@ -5,6 +5,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import javax.persistence.*;
 
 import java.io.Serializable;
+import java.util.Set;
 
 /**
  * A Product.
@@ -31,6 +32,15 @@ public class Product implements Serializable {
 
     @Column(name = "comment")
     private String comment;
+
+
+
+    @ManyToMany
+    @JoinTable(
+            name = "product_shop",
+            joinColumns = @JoinColumn(name = "product_id"),
+            inverseJoinColumns = @JoinColumn(name = "shop_id"))
+    private Set<Shop> soldIn;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -93,6 +103,10 @@ public class Product implements Serializable {
         this.comment = comment;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+
+    public Set<Shop> getSoldIn() {
+        return soldIn;
+    }
 
     @Override
     public boolean equals(Object o) {

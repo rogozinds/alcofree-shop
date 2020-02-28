@@ -12,7 +12,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 /**
  * Service Implementation for managing {@link Product}.
@@ -72,6 +74,18 @@ public class ProductService {
             .map(productMapper::toDto);
     }
 
+    /**
+     * Get products b y country
+     *
+     * @param countryId the id of the country.
+     * @return the entity.
+     */
+    @Transactional(readOnly = true)
+    public Page<ProductDTO> findProductsByCountry(Long countryId, Pageable pageable) {
+        log.debug("Request to get Proudcut by countryId : {}", countryId);
+        Page<ProductDTO> products = productRepository.findByCountry(countryId, pageable).map(productMapper::toDto);
+        return products;
+    }
     /**
      * Delete the foo by id.
      *

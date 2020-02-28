@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+        <property name="autoIncrement" value="true"/>
+
+    <changeSet id="20200220_1-1" author="rogozin">
+        <createTable tableName="product_shop">
+            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="product_id" type="bigint">
+                <constraints nullable="false" />
+            </column>
+            <column name="shop_id" type="bigint">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="20200220_1-2" author="rogozin">
+        <addColumn tableName="shop">
+            <column name="country_id" type="bigint">
+            </column>
+        </addColumn>
+    </changeSet>
+
+<!--
+    <changeSet id="20200220_1-1-relations" author="jhipster">
+        <addForeignKeyConstraint baseColumnNames="person_id"
+                                 baseTableName="product"
+                                 constraintName="fk_product_shop"
+                                 deferrable="true"
+                                 initiallyDeferred="true"
+                                 onDelete="CASCADE"
+                                 onUpdate="RESTRICT"
+                                 referencedColumnNames="id"
+                                 referencedTableCatalogName="product"
+                                 referencedTableName="shop"
+                                 validate="true"/>
+    </changeSet>
+    -->
+</databaseChangeLog>

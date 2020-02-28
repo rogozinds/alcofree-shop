@@ -5,6 +5,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import javax.persistence.*;
 
 import java.io.Serializable;
+import java.util.Set;
 
 /**
  * A Shop.
@@ -31,6 +32,13 @@ public class Shop implements Serializable {
 
     @Column(name = "city")
     private String city;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "country_id", referencedColumnName = "id")
+    private Country country;
+
+    @ManyToMany(mappedBy = "soldIn")
+    private Set<Product> products;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -93,6 +101,18 @@ public class Shop implements Serializable {
         this.city = city;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+
+    public Set<Product> getProducts() {
+        return products;
+    }
+
+    public Country getCountry() {
+        return country;
+    }
+
+    public void setCountry(Country country) {
+        this.country = country;
+    }
 
     @Override
     public boolean equals(Object o) {
