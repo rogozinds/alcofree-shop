@@ -31,7 +31,7 @@ class SimpleCard extends React.Component {
                       {this.props.description}
                   </Typography>
                   <div>
-                      {this.props.country}
+                      {this.props.shop}
                   </div>
               </CardContent>
               <CardMedia className="media" component="div" image={this.props.img_url}/>

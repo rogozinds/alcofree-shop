@@ -5,6 +5,7 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import SimpleCard from './SimpleCard';
 import {getProducts} from './list.reducer';
+import {getEntities} from '../../entities/country/country.reducer';
 
 class Home extends React.Component {
     constructor(props) {
@@ -18,6 +19,7 @@ class Home extends React.Component {
     }
 
   componentDidMount() {
+    this.props.getEntities();
     this.props.getProducts();
   }
 
@@ -45,6 +47,9 @@ class Home extends React.Component {
             id: "country-filter"
           }}
         >
+        {this.props.countries.map(item=>
+            <li> {item.name} </li>
+        )}
       </Select>
 
       {
@@ -54,7 +59,7 @@ class Home extends React.Component {
               <SimpleCard name={item.name}
                           description={item.description}
                           img_url={item.img_url}
-                          country={"MOCK COUNTRY"}>
+                          shop={"MOCK SHOP"}>
               </SimpleCard>
               </Grid>
           )}
@@ -67,9 +72,10 @@ class Home extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-    return {products: state.list.products}
+    return {products: state.list.products,
+            countries:state.country.entities}
   };
 
-const mapDispatchToProps = {getProducts};
+const mapDispatchToProps = {getProducts,getEntities};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
